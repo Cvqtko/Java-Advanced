@@ -10,7 +10,7 @@ public class Exercise_12 {
 		String[] materialsQuantity;
 		String line = "";
 
-		while (!input.isBlank()) {
+		while (!input.isEmpty()) {
 			line = line + " " + input;
 			input = scanner.nextLine();
 		}
