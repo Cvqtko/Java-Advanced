@@ -14,24 +14,29 @@ public class Exercise_09 {
 			numbers[i] = number;
 		}
 
-		String line = scanner.nextLine();
-
-		while (!"party over".equals(line)) {
+		String line;
+		while (true) {
+			if ("party over".equals(line = scanner.nextLine())) {
+				break;
+			}
 
 			String[] tokens = line.split("\\s+");
 			int pattern = Integer.parseInt(tokens[0]);
 			int position = Integer.parseInt(tokens[1]);
 
 			for (int i = 0; i < numbers.length; i++) {
-				if (pattern == 1) {
+				switch (pattern) {
+				case 1:
 					changeValueToOne(numbers, position);
-				} else if (pattern == 0) {
+					break;
+				case 0:
 					changeValueToZero(numbers, position);
-				} else {
-					changeValueByPosition(numbers, position);
+					break;
+				case -1:
+					changeValueByPosition(numbers, position, i);
+					break;
 				}
 			}
-			line = scanner.nextLine();
 		}
 
 		for (int number : numbers) {
@@ -41,37 +46,30 @@ public class Exercise_09 {
 
 	private static void changeValueToZero(int[] numbers, int position) {
 		for (int i = 0; i < numbers.length; i++) {
-			int a = numbers[i];
-			int b = a >> position;
-			int d = ~(1 << position);
-			int result = a & d;
-			numbers[i] = result;
+			int number = numbers[i];
+			int mask = ~(1 << position);
+			numbers[i] = number & mask;
 		}
 	}
 
 	private static void changeValueToOne(int[] numbers, int position) {
 		for (int i = 0; i < numbers.length; i++) {
-			int a = numbers[i];
-			int b = a >> position;
-			int result = a | b;
-			numbers[i] = result;
+			int number = numbers[i];
+			int mask = 1 << position;
+			numbers[i] = number | mask;
 		}
 	}
 
-	private static void changeValueByPosition(int[] numbers, int position) {
-		for (int i = 0; i < numbers.length; i++) {
-			int a = numbers[i];
-			int b = a >> position;
-			int c = b & 1;
-			if (c == 0) {
-				int d = 1 << position;
-				int result = a | b;
-				numbers[i] = result;
-			} else {
-				int d = ~(1 << position);
-				int result = a & d;
-				numbers[i] = result;
-			}
+	private static void changeValueByPosition(int[] numbers, int position, int i) {
+		int number = numbers[i];
+		int numberAfterShift = number >> position;
+		int firstBit = numberAfterShift & 1;
+		if (firstBit == 0) {
+			int mask = 1 << position;
+			numbers[i] = number | mask;
+		} else {
+			int mask = ~(1 << position);
+			numbers[i] = number & mask;
 		}
 	}
 }
