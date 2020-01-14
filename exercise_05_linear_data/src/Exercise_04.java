@@ -19,14 +19,18 @@ public class Exercise_04 {
 				}
 			}
 		}
+		printMatrix(matrix, rowIndex, colIndex);
+		System.out.println(bestSum);
+
+	}
+
+	private static void printMatrix(int[][] matrix, int rowIndex, int colIndex) {
 		for (int i = rowIndex; i < rowIndex + 2; i++) {
 			for (int j = colIndex; j < colIndex + 2; j++) {
 				System.out.print(matrix[i][j] + " ");
 			}
 			System.out.println();
 		}
-		System.out.println(bestSum);
-
 	}
 
 	public static int[][] fillMatrix() {
