@@ -6,11 +6,11 @@ public class Exercise_01 {
 	public static void main(String[] args) {
 
 		Scanner input = new Scanner(System.in);
-		int n = Integer.parseInt(input.nextLine());
-		String[] names = new String[n];
-		int[] encryptedNames = new int[n];
+		int namesCount = Integer.parseInt(input.nextLine());
+		String[] names = new String[namesCount];
+		int[] encryptedNames = new int[namesCount];
 
-		for (int i = 0; i < n; i++) {
+		for (int i = 0; i < names.length; i++) {
 			names[i] = input.nextLine();
 		}
 		input.close();
